@@ -3,7 +3,7 @@ def GIT_URL='http://flegrand@git.demo.cloudcontrolled.net:8800/demo/'+PROJECT+'.
 def REGISTRY_URL='registry.demo.cloudcontrolled.net/demo/'+PROJECT
 
 node {
-        git branch: env.BRANCH_NAME, credentialsId: 'flegrand', url: GIT_URL
+        git branch: env.BRANCH_NAME, credentialsId: 'jenkins', url: GIT_URL
 
         stage "Build and Push Docker image"
         withDockerRegistry(registry: [credentialsId: 'flegrand']) {
