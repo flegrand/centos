@@ -1,5 +1,5 @@
 def PROJECT='centos'
-def GIT_URL='http://flegrand@jenkins.demo.cloudcontrolled.net:8080/demo/'+PROJECT+'.git'
+def GIT_URL='http://flegrand@git.demo.cloudcontrolled.net:8800/demo/'+PROJECT+'.git'
 
 node {
         git branch: env.BRANCH_NAME, credentialsId: 'flegrand', url: GIT_URL
