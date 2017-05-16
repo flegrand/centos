@@ -1,5 +1,5 @@
 def PROJECT='centos'
-def GIT_URL='http://flegrand@git.demo.cloudcontrolled.net:8800/demo/'+PROJECT+'.git'
+def GIT_URL='http://jenkins@git.demo.cloudcontrolled.net:8800/demo/'+PROJECT+'.git'
 def REGISTRY_URL='registry.demo.cloudcontrolled.net/demo/'+PROJECT
 
 node {
