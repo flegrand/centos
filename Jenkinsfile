@@ -6,7 +6,7 @@ node {
         git branch: env.BRANCH_NAME, credentialsId: 'jenkins', url: GIT_URL
 
         stage "Build and Push Docker image"
-        withDockerRegistry(registry: [credentialsId: 'flegrand']) {
+        withDockerRegistry(registry: [credentialsId: 'jenkins']) {
                 withDockerServer(server: [uri: 'unix:///var/run/docker.sock']) {
                         dockerImg = docker.build(REGISTRY_URL+':'+env.BRANCH_NAME+'-build'+env.BUILD_NUMBER,'.')
                         dockerImg.push()
@@ -15,5 +15,5 @@ node {
         }
 
         // Launch dependant jobs
-        build job: 'httpd/2.4', wait: false
+        //build job: 'httpd/2.4', wait: false
 }
