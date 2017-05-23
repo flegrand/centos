@@ -16,4 +16,6 @@ node {
 
         // Launch dependant jobs
         build job: 'httpd/2.4', wait: false
+        build job: 'java/openjdk-7-jdk', wait: false
+        build job: 'java/openjdk-8-jdk', wait: false
 }
