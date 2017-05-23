@@ -1,5 +1,5 @@
 def PROJECT='centos'
-def GIT_URL='ssh://git@github.com:flegrand/'+PROJECT+'.git'
+def GIT_URL='git@github.com:flegrand/'+PROJECT+'.git'
 def REGISTRY_URL='registry.demo.cloudcontrolled.net/demo/'+PROJECT
 
 node {
