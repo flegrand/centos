@@ -4,7 +4,7 @@ FROM centos:7
 RUN yum upgrade -y
 
 # Packages
-RUN yum install -y zip unzip procps systat net-tools python-setuptools wget
+RUN yum install -y zip unzip procps systat net-tools wget
 
 # Timezone
 RUN ln -sf /usr/share/zoneinfo/Europe/Zurich /etc/localtime
