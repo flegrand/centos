@@ -1,15 +1,17 @@
 def PROJECT='centos'
 def GIT_URL='git@github.com:flegrand/'+PROJECT+'.git'
-def REGISTRY_URL='registry.demo.cloudcontrolled.net/demo/'+PROJECT
+def REGISTRY_ADDRESS='registry.demo.cloudcontrolled.net'
+def REGISTRY_PATH=REGISTRY_ADDRESS+'/demo/'+PROJECT
+def DOCKER_SERVER_ENDPOINT='159.100.249.45:443'
 
 node {
         git branch: env.BRANCH_NAME, credentialsId: 'jenkins', url: GIT_URL
 
         stage "Build and Push Docker image"
         sh '. /var/jenkins_home/ucp-bundle/env.sh'
-        withDockerRegistry(registry: [credentialsId: 'jenkins', url: "https://registry.demo.cloudcontrolled.net"]) {
-                withDockerServer([credentialsId: "ucp", uri: "tcp://159.100.249.45:443"]) {
-                        dockerImg = docker.build(REGISTRY_URL+':'+env.BRANCH_NAME+'-build'+env.BUILD_NUMBER,'.')
+        withDockerRegistry(registry: [credentialsId: 'jenkins', url: "https://"+REGISTRY_ADDRESS]) {
+                withDockerServer([credentialsId: "ucp", uri: "tcp://"+DOCKER_SERVER_ENDPOINT]) {
+                        dockerImg = docker.build(REGISTRY_PATH+':'+env.BRANCH_NAME+'-build'+env.BUILD_NUMBER,'.')
                         dockerImg.push()
                         dockerImg.push(env.BRANCH_NAME)
                 }
