@@ -6,8 +6,9 @@ node {
         git branch: env.BRANCH_NAME, credentialsId: 'jenkins', url: GIT_URL
 
         stage "Build and Push Docker image"
+        sh 'source /var/jenkins_home/ucp-bundle/env.sh'
         withDockerRegistry(registry: [credentialsId: 'jenkins']) {
-                withDockerServer(server: [uri: 'unix:///var/run/docker.sock']) {
+                withDockerServer(server: [uri: 'tcp://159.100.249.45:443']) {
                         dockerImg = docker.build(REGISTRY_URL+':'+env.BRANCH_NAME+'-build'+env.BUILD_NUMBER,'.')
                         dockerImg.push()
                         dockerImg.push(env.BRANCH_NAME)
