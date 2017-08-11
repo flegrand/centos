@@ -7,6 +7,7 @@ node {
 
         stage "Build and Push Docker image"
         sh '. /var/jenkins_home/ucp-bundle/env.sh'
+        sh 'docker ps'
         withDockerRegistry(registry: [credentialsId: 'jenkins']) {
                 withDockerServer(server: [uri: 'tcp://159.100.249.45:443']) {
                         dockerImg = docker.build(REGISTRY_URL+':'+env.BRANCH_NAME+'-build'+env.BUILD_NUMBER,'.')
